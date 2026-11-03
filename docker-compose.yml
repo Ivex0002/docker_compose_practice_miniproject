@@ -1,0 +1,19 @@
+services:
+  my-web-app-e1-1-bonus:
+    build: .
+    image: my-web
+    ports:
+      - "8080:8000"
+    environment:
+      - MODE=dev
+      - DEBUG=true
+      - REDIS_HOST=cache
+    volumes:
+      - .:/app
+    depends_on:
+      - cache
+
+  cache:
+    image: redis:latest
+    ports:
+      - "6379:6379"
